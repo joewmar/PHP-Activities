@@ -13,10 +13,10 @@
     $arrPassword= array("admin" => "Pass1234", "joemar" => "hello12345", "pepito" => "manaloto", "juan" => "delacruz", "pedro" => "penduko");
 
 ?>
-<body>
+<body >
 
     
-    <div id="login">
+    <div id="login" >
             <div class="container">
                 <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">
@@ -26,20 +26,19 @@
                                     $username = $_POST['txtUsername'];
                                     $password = $_POST['txtPassword'];
                                     if ($userType === $arrUserType[$username] && $password === $arrPassword[$username]):
-                                        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">';
-                                        echo '<strong>Welcome to System: </strong> ' . $username .'.';
-                                        echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-                                        echo '<span aria-hidden="true">&times;</span>';
-                                        echo '</button>';
-                                        echo '</div>';
+                                        $typeAlert = "success";
+                                        $messege = "<strong>Welcome to System: </strong> " . $username .".";
                                     else:
-                                        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
-                                        echo '<strong>Invalid</strong> Username/Password';
-                                        echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
-                                        echo '<span aria-hidden="true">&times;</span>';
-                                        echo '</button>';
-                                        echo '</div>';
+                                        $typeAlert = "danger";
+                                        $messege = "<strong>Invalid</strong> Username/Password.";
                                     endif;
+
+                                    echo '<div class="alert alert-' .$typeAlert .' alert-dismissible fade show" role="alert">';
+                                    echo  $messege;
+                                    echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">';
+                                    echo '<span aria-hidden="true">&times;</span>';
+                                    echo '</button>';
+                                    echo '</div>';
                                 }
                             
                         ?>
