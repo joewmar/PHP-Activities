@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="txtUsername" class="text-info">Username:</label><br>
-                                    <input type="text" name="txtUsername" id="txtUsername" class="form-control">
+                                    <input type="text" name="txtUsername" id="txtUsername" class="form-control" autofocus>
                                 </div>
                                 <div class="form-group">
                                     <label for="txtPassword" class="text-info">Password:</label><br>
