@@ -6,11 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/custom-login.css">
+    <title>Login Form</title>
 </head>
 
 <?php
-    $arrUserType = array("admin" => "Admin", "joemar" => "Admin", "pepito" => "Content Manager", "juan" => "Content Manager", "pedro" => "System User");
-    $arrPassword= array("admin" => "Pass1234", "joemar" => "hello12345", "pepito" => "manaloto", "juan" => "delacruz", "pedro" => "penduko");
+    $arrData = array(
+        "Admin" => array(
+            "admin" => "Pass1234",
+            "joemar" => "hello12345"
+        ),
+        "Content Manager" => array(
+            "pepito" => "manaloto",
+            "juan" => "delacruz"
+
+        ),
+        "System User" => array(
+            "pedro" => "penduko"
+        ),
+    );
 
 ?>
 <body >
@@ -22,16 +35,25 @@
                     <div id="login-column" class="col-md-6">
                     <?php
                                 if(isset($_POST['btnSubmit'])){
+                                    // print_r($arrData);
                                     $userType = $_POST['drpPosistion'];
                                     $username = $_POST['txtUsername'];
                                     $password = $_POST['txtPassword'];
-                                    if ($userType === $arrUserType[$username] && $password === $arrPassword[$username]):
-                                        $typeAlert = "success";
-                                        $messege = "<strong>Welcome to System: </strong> " . $username .".";
-                                    else:
-                                        $typeAlert = "danger";
-                                        $messege = "<strong>Invalid</strong> Username/Password.";
-                                    endif;
+                                    $typeAlert = "danger";
+                                    $messege = "<strong>Invalid</strong> Username/Password.";
+
+                                    foreach($arrData as $keyUserType => $valueUserType){
+                                        if ($userType == $keyUserType){
+                                            foreach($valueUserType as $key => $value){
+                                                if($username === $key && $password === $value):
+                                                    $typeAlert = "success";
+                                                    $messege = "<strong>Welcome to System: </strong> " . $username .".";
+                                                    break;
+                                                endif;
+
+                                            }
+                                        }
+                                    }
 
                                     echo '<div class="alert alert-' .$typeAlert .' alert-dismissible fade show" role="alert">';
                                     echo  $messege;
@@ -44,7 +66,7 @@
                         ?>
                         <div id="login-box" class="col-md-12 h-100">
                             <form id="login-form" class="form" action="" method="post">
-                                <h3 class="text-center text-info">Login</h3>
+                                <h3 class="text-center text-info">HELLO WORLD INC.</h3>
                                 <div class="form-group">
                                     <select class="form-control" name="drpPosistion" id="drpPosistion">
                                         <option value="Admin">Admin</option>
