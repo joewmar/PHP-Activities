@@ -15,7 +15,7 @@
                 <legend>Products:</legend>
                 <?php
                     foreach($arrDrinks as $key => $value){
-                        echo '<input type="checkbox" name="chkDrinks[]" id="chk' . $key .'" value="'. $key .'"><label for="chk' . $key .'">' . $key . ' - ₱ ' . $value . '</label><br>';
+                        echo '<input type="checkbox" name="chkDrinks[]" id="chk' . $key .'" value="'. $key .'"><label for="chk' . $key .'">' . $key . ' - ₱ ' . $value . '</label><br> ' . "\n";
                     }
                 ?>
             </fieldset>
@@ -31,7 +31,7 @@
 
                 <label for="txtQTY">Quantity</label>
                 <input type="number" name="txtQTY" id="txtQTY" min="1" value="1">
-                <input type="submit" name="btnSend" id="btnSend" value="Check Out">
+                <button type="submit" name="btnSend" id="btnSend">Check Out</button>
             </fieldset>
         </form>
 
@@ -44,12 +44,13 @@
         <ul>
             <?php
             
-                $itemCount = NULL;
                 $arrUserChoice = $_POST['chkDrinks'];
                 $size = $_POST['drpSize'];
                 $quantity = $_POST['txtQTY'] ;
-                $addedSizeCompute = 0;
-                $totalAmount = 0;
+                $addedSizeCompute = 0; // additional add size
+                $totalAmount = 0;       // total all cost
+                $numItems = 0;          // count items
+                
 
 
                 foreach($arrUserChoice as $key => $value){
@@ -60,21 +61,21 @@
                     else:
                         echo '<li>'. $quantity . ' piece of '. $size . ' '. $value .' amouting to ₱'. $addedSizeCompute . '</li>';
                     endif;
-
-                    $itemCount++; // Count an item
-                    
+                                        
                     $totalAmount +=  ($addedSizeCompute * $quantity); // Process the computation amount all per item   
+                    $numItems += $quantity; // the quatity per item
                 }
-            $qtyPerItem = $quantity * $itemCount; // the quatity per item
+            
             ?>  
         </ul>
 
-        <b>Total Number of Items: </b> <?php echo $qtyPerItem; ?> <br>
-        <b>Total Amount: </b> <?php echo $totalAmount ?>
+        <b>Total Number of Items: </b> <?php echo $numItems; ?> <br>
+        <b>Total Amount: </b> <?php echo $totalAmount; ?>
             
     <?php }
-            
-    
+           elseif(isset($_POST['btnSend'])){
+                echo 'No seleted Product. Try Again';
+            } 
     ?>
 
 
